@@ -1,16 +1,20 @@
 # Nginx Upstream Monitor
 
-This Docker container reads upstream information from an nginx-plus server and posts a status message about it to a chat room. Currently it supports on-premise HipChat and Microsoft Teams, more integrations will be added soon.
+This Docker container reads upstream information from an nginx-plus server using the API and posts a status message about it to a chat room. Currently it only displays information messages on the console but more integrations will be added soon.
 
 ## Example usage
 
+This example queries the nginx demo site, https://demo.nginx.com/
 
+```
+docker run -e NGINX_SERVER_URL=https://demo.nginx.com/ --rm -t kindredgroup/nginx-upstream-monitor
+```
 
-## Support integrations
+## Upcoming integrations
 
   - HipChat on-premise
   - Microsoft Teams
-
+  - Slack
 
 ## Acknowledgement
 
