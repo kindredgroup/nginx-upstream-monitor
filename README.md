@@ -39,9 +39,8 @@ docker run --env-file=docker.env --rm -t kindredgroup/nginx-upstream-monitor
 
 ## Supported integrations
 
-[hipchat]: https://github.com/kindredgroup/nginx-upstream-monitor/raw/master/doc/hipchat.png "HipChat Example notification"
-[teams]: https://github.com/kindredgroup/nginx-upstream-monitor/raw/master/doc/teams.png "Teams Example notification"
-
+[hipchat]: https://raw.githubusercontent.com/kindredgroup/nginx-upstream-monitor/master/docs/hipchat.png "HipChat Example notification"
+[teams]: https://raw.githubusercontent.com/kindredgroup/nginx-upstream-monitor/master/docs/teams.png "Teams Example notification"
 
 ### HipChat
 
