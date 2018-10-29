@@ -10,10 +10,34 @@ This example queries the nginx demo site, https://demo.nginx.com/
 docker run -e NGINX_SERVER_URL=https://demo.nginx.com/ --rm -t kindredgroup/nginx-upstream-monitor
 ```
 
-## Upcoming integrations
+You probably want to create an enviroment file to make running the container easier:
+
+```
+# docker.env
+ENVIRONMENT=PROD
+
+HIPCHAT_ENABLED=1
+HIPCHAT_SERVER=hipchat.example.com
+HIPCHAT_TOKEN=x
+HIPCHAT_ROOM_ID=123
+
+TEAMS_ENABLED=1
+TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/xxx
+```
+
+and then run it like:
+
+```
+docker run --env-file=docker.env --rm -t kindredgroup/nginx-upstream-monitor
+```
+
+## Supported integrations
 
   - HipChat on-premise
   - Microsoft Teams
+
+## Upcoming integrations
+
   - Slack
 
 ## Acknowledgement
