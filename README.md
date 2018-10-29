@@ -15,6 +15,7 @@ You probably want to create an enviroment file to make running the container eas
 ```
 # docker.env
 ENVIRONMENT=PROD
+NGINX_SERVER_URL=https://demo.nginx.com
 
 HIPCHAT_ENABLED=1
 HIPCHAT_SERVER=hipchat.example.com
