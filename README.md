@@ -46,7 +46,7 @@ docker run --env-file=docker.env --rm -t kindredgroup/nginx-upstream-monitor
 
 ![HipChat Example notification][hipchat]
 
-###Microsoft Teams
+### Microsoft Teams
 
 ![Teams Example notification][teams]
 
