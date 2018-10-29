@@ -2,7 +2,9 @@
 
 This Docker container reads upstream information from an nginx-plus server using the API and posts a status message about it to a chat room.
 
-Supported integrations are:
+The idea is that you run this container via a cronjob on a fixed schedule, giving you a very simple but powerful way of monitoring nginx.
+
+Currently supported integrations are:
 
   - HipChat (both self-hosted and cloud)
   - Microsoft Teams
@@ -39,14 +41,28 @@ docker run --env-file=docker.env --rm -t kindredgroup/nginx-upstream-monitor
 
 ## Supported integrations
 
+You can use multiple integrations at the same time, but be aware that that will make your notifications run a bit slower.
+
 [hipchat]: https://raw.githubusercontent.com/kindredgroup/nginx-upstream-monitor/master/docs/hipchat.png "HipChat Example notification"
 [teams]: https://raw.githubusercontent.com/kindredgroup/nginx-upstream-monitor/master/docs/teams.png "Teams Example notification"
 
 ### HipChat
 
+This uses the HipChat API v2 for room integrations. Required environment variables are:
+
+  - HIPCHAT_ENABLED=1
+  - HIPCHAT_SERVER=hipchat.example.com
+  - HIPCHAT_TOKEN=x
+  - HIPCHAT_ROOM_ID=123
+
 ![HipChat Example notification][hipchat]
 
 ### Microsoft Teams
+
+Required environment variables are:
+
+  - TEAMS_ENABLED=1
+  - TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/xxx
 
 ![Teams Example notification][teams]
 
