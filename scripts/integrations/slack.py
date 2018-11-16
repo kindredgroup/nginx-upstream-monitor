@@ -11,10 +11,49 @@ import sys
 import json
 import datetime
 
-def slack_notify(webhook_url, channel, message, link_url='http://www.example.com',
-                   format='text', host='api.hipchat.com', component='unknown',
-                   status='unknown', status_style='lozenge-current',
-                   total_upstreams=0, healthy_upstreams=0, environment='PROD'):
+slack_attachments = []
+
+def flush_slack_queue(webhook_url, channel, environment='unknown'):
+
+  count = len(slack_attachments)
+
+  if count == 0:
+    print ("There are no notifications to send.")
+    return
+
+  payload = {
+      'channel': channel,
+      'username': 'Nginx Upstream Monitor',
+      'text': "Nginx Upstream Monitor has found {0} problems on the {1} environment".format(count, environment),
+      "attachments": slack_attachments
+  }
+
+  print(payload)
+
+  # Send the actual call to the HipChat server
+  r = requests.post(webhook_url, json=payload)
+  r.raise_for_status()
+
+
+# Add a notification to the queue
+def slack_queue(component, message, status, total_upstreams, healthy_upstreams, link_url=''):
+
+  color = 'warning'
+  if status == 'error':
+    color = 'danger'
+
+  attachment = {
+    "color": color,
+    "title": "Component: {0}".format(component),
+    "title_link": link_url,
+    "text": "{0}\n*Total upstreams*: {1} - *Healthy upstreams*: {2}".format(message, total_upstreams, healthy_upstreams)
+  }
+
+  slack_attachments.append(attachment)
+
+
+# Send a single, complete message to Slack
+def slack_notify(webhook_url, channel, message, link_url='http://www.example.com', format='text', component='unknown', status='unknown', total_upstreams=0, healthy_upstreams=0, environment='PROD'):
 
     color = 'warning'
     if status == 'error':
@@ -54,8 +93,6 @@ def slack_notify(webhook_url, channel, message, link_url='http://www.example.com
             attachment
         ]
     }
-
-    print(payload)
 
     # Send the actual call to the HipChat server
     r = requests.post(webhook_url, json=payload)
