@@ -10,6 +10,7 @@ import urllib.parse
 
 from integrations.hipchat import *
 from integrations.teams import *
+from integrations.slack import *
 
 def send_notification(component, message, status, link_url, total_upstreams, healthy_upstreams):
 
@@ -26,7 +27,8 @@ def send_notification(component, message, status, link_url, total_upstreams, hea
 
   TEAMS_WEBHOOK_URL = os.getenv('TEAMS_WEBHOOK_URL', '')
 
-  SLACK_WEBHOOK_URL = os.getenv('SLACK_WEBHOOK_URL', '')
+  SLACK_WEBHOOK_URL  = os.getenv('SLACK_WEBHOOK_URL', '')
+  SLACK_CHANNEL_NAME = os.getenv('SLACK_CHANNEL_NAME', '')
 
   # HipChat is hardcoded ON right now
   if send_hipchat:
@@ -57,6 +59,15 @@ def send_notification(component, message, status, link_url, total_upstreams, hea
   # Slack
   if send_slack:
     print ("Sending Slack notification...")
+
+    try:
+      slack_notify(webhook_url=SLACK_WEBHOOK_URL, channel=SLACK_CHANNEL_NAME,
+                     message=message, status=status, component=component, link_url=link_url,
+                     environment=ENVIRONMENT, total_upstreams=total_upstreams, healthy_upstreams=healthy_upstreams)
+
+    except Exception as e:
+      msg = "[ERROR] Slack notify failed: '{0}'".format(e)
+      print(msg, file=sys.stderr)
 
 
 def check_upstreams(base_url):
