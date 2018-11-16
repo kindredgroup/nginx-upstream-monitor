@@ -131,6 +131,9 @@ def check_upstreams(base_url):
 
         else:
           up = unhealthy = unavail = total = 0
+          status  = "unknown"
+          message = "unknown"
+
           for peer in loaded_json[upstream][item]:
             state  = peer["state"]
             name   = peer["name"]
@@ -179,8 +182,7 @@ def check_upstreams(base_url):
               message = "All servers look good, not sending a message"
 
           # We are done with processing, show a result and send it to the integrations
-          print (status + ": " + message)
-          if status != 'INFO':
+          if status == 'ERROR' or status == 'WARNING':
             if use_digest:
               queue_notification(component=upstream, message=message, status=status, total_upstreams=total, healthy_upstreams=up)
             else:
