@@ -29,20 +29,10 @@ def slack_notify(webhook_url, channel, message, link_url='http://www.example.com
     # See: https://api.slack.com/docs/message-attachments
     attachment = {
         "color": color,
-        "title": "Upstream: {0}".format(component),
+        "title": "{0} - {1}".format(environment, component),
         "title_link": link_url,
         "text": message,
         "fields": [
-          {
-            "title": "Type:",
-            "value": status,
-            "short": True
-          },
-          {
-            "title": "Environment:",
-            "value": environment,
-            "short": True
-          },
           {
             "title": "Total upstreams:",
             "value": total_upstreams,
