@@ -138,9 +138,13 @@ def check_upstreams(base_url):
             state  = peer["state"]
             name   = peer["name"]
             server = peer["server"]
+            backup = peer["backup"]
             print(" - %-21s %10s" % (server, state))
 
-            if state == "down":
+            if backup:
+              print "Peer is defined as a backup, ignoring status"
+
+            elif state == "down":
               print ("   -> Peer is marked as down, ignorning status")
 
             elif state == "up":
