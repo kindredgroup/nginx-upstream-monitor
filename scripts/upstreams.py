@@ -69,6 +69,20 @@ def queue_notification(component, message, status, total_upstreams, healthy_upst
   data_url = base_url + '/api/3/http/upstreams/'
   link_url = base_url + '/dashboard.html#upstreams'
 
+  # HipChat
+
+
+  # Teams
+  if send_teams:
+    print ("Adding Teams notification to queue")
+
+    try:
+      teams_queue(component=component, message=message, status=status, total_upstreams=total_upstreams, healthy_upstreams=healthy_upstreams)
+
+    except Exception as e:
+      msg = "[ERROR] Teams queue failed: '{0}'".format(e)
+      print(msg, file=sys.stderr)
+
   # Slack
   if send_slack:
     print ("Adding Slack notification to queue")
