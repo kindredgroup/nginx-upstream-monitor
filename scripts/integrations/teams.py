@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #
+# See: https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference
 
 from __future__ import print_function
 
@@ -21,7 +22,8 @@ def flush_teams_queue(webhook_url, environment='unknown', link_url=''):
   payload = {
     "@type": "MessageCard",
     "@context": "https://schema.org/extensions",
-    "summary": " There were problems",
+    "title": "Nginx Upstream Monitor has found {0} problems on the *{1}* environment".format(count, environment),
+    "summary": "Nginx Upstream Monitor has found {0} problems on the *{1}* environment".format(count, environment),
     "sections": teams_sections
   }
 
@@ -45,24 +47,10 @@ def teams_queue(component, message, status, total_upstreams, healthy_upstreams):
 
   section = {
     "startGroup": "true",
-    "title": "{}: {}".format(status, component),
     "activityImage": status_image,
-    "activityTitle": message,
+    "activityTitle": "{} - {}".format(component, message),
     "activitySubTitle": date,
-    "facts": [
-      {
-        "name": "Component:",
-        "value": component
-      },
-      {
-        "name": "Total upstreams:",
-        "value": total_upstreams
-      },
-      {
-        "name": "Healthy upstreams:",
-        "value": healthy_upstreams
-      }
-    ]
+    "text": "Total upstreams: {0} - Healthy upstream: {1}".format(total_upstreams, healthy_upstreams)
   }
 
   teams_sections.append(section)
@@ -78,7 +66,6 @@ def teams_notify(webhook, message, link_url='http://www.example.com', component=
     if status == 'error':
       status_image = "https://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg"
 
-    # See: https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference
     section = {
       "startGroup": "true",
       "title": "{}: {}".format(status, component),
