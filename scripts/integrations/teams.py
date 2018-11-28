@@ -22,7 +22,7 @@ def flush_teams_queue(webhook_url, environment='unknown', link_url=''):
   payload = {
     "@type": "MessageCard",
     "@context": "https://schema.org/extensions",
-    "title": "Nginx Upstream Monitor has found {0} problems on the *{1}* environment".format(count, environment),
+    "title": "We found {0} problems on the *{1}* environment".format(count, environment),
     "summary": "Nginx Upstream Monitor has found {0} problems on the *{1}* environment".format(count, environment),
     "sections": teams_sections
   }
