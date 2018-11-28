@@ -8,6 +8,7 @@ Currently supported integrations are:
 
   - HipChat (both self-hosted and cloud)
   - Microsoft Teams
+  - Slack
 
 ## Example usage
 
@@ -24,6 +25,8 @@ You probably want to create an enviroment file to make running the container eas
 ENVIRONMENT=PROD
 NGINX_SERVER_URL=https://demo.nginx.com
 
+USE_DIGEST_NOTIFICATIONS=1
+
 HIPCHAT_ENABLED=1
 HIPCHAT_SERVER=hipchat.example.com
 HIPCHAT_TOKEN=x
@@ -31,6 +34,10 @@ HIPCHAT_ROOM_ID=123
 
 TEAMS_ENABLED=1
 TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/xxx
+
+SLACK_ENABLED=1
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx/yyy
+SLACK_CHANNEL_NAME=#channel
 ```
 
 and then run it like:
@@ -64,14 +71,30 @@ Required environment variables are:
   - TEAMS_ENABLED=1
   - TEAMS_WEBHOOK_URL=https://outlook.office.com/webhook/xxx
 
+Single notification:
+
 ![Teams Example notification][teams]
 
+Digest notification:
 
-## Upcoming integrations
+TODO
 
-  - Slack
+### Slack
 
-## Acknowledgement
+Required environment variables are:
+
+  - SLACK_ENABLED=1
+  - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx/yyy
+  - SLACK_CHANNEL_NAME=#channel
+
+Digest notification:
+
+TODO
+
+
+## Acknowledgements
+
+TODO
 
 ## License
 
