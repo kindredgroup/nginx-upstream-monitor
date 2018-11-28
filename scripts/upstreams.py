@@ -12,6 +12,8 @@ from integrations.hipchat import *
 from integrations.teams import *
 from integrations.slack import *
 
+ignore_backup_members = False
+
 send_hipchat = os.getenv('HIPCHAT_ENABLED', 0)
 send_teams   = os.getenv('TEAMS_ENABLED', 0)
 send_slack   = os.getenv('SLACK_ENABLED', 0)
@@ -31,6 +33,22 @@ SLACK_CHANNEL_NAME = os.getenv('SLACK_CHANNEL_NAME', '')
 
 
 def flush_notification_queue(base_url):
+
+  data_url = base_url + '/api/3/http/upstreams/'
+  link_url = base_url + '/dashboard.html#upstreams'
+
+  # HipChat
+
+  # Teams
+  if send_teams:
+    print ("Flushing queue to Teams...")
+
+    try:
+      flush_teams_queue(webhook_url=TEAMS_WEBHOOK_URL, environment=ENVIRONMENT, link_url=link_url)
+
+    except Exception as e:
+      msg = "[ERROR] Flushing Teams queue failed: '{0}'".format(e)
+      print(msg, file=sys.stderr)
 
   # Slack
   if send_slack:
@@ -139,10 +157,10 @@ def check_upstreams(base_url):
             name   = peer["name"]
             server = peer["server"]
             backup = peer["backup"]
-            print(" - %-21s %10s" % (server, state))
+            print(" - %-21s %10s %10s" % (server, state, " (backup)" if backup else ""))
 
-            if backup:
-              print "Peer is defined as a backup, ignoring status"
+            if ignore_backup_members and backup:
+              print ("Peer is defined as a backup, ignoring status")
 
             elif state == "down":
               print ("   -> Peer is marked as down, ignorning status")
