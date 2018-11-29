@@ -14,21 +14,21 @@ from integrations.slack import *
 
 ignore_backup_members = True
 
-send_hipchat = os.getenv('HIPCHAT_ENABLED', 0)
-send_teams   = os.getenv('TEAMS_ENABLED', 0)
-send_slack   = os.getenv('SLACK_ENABLED', 0)
-use_digest   = os.getenv('USE_DIGEST_NOTIFICATIONS', 0)
+send_hipchat       = os.getenv('HIPCHAT_ENABLED', 0)
+send_teams         = os.getenv('TEAMS_ENABLED', 0)
+send_slack         = os.getenv('SLACK_ENABLED', 0)
+use_digest         = os.getenv('USE_DIGEST_NOTIFICATIONS', 0)
 
 # We read configuration as environment variables to make it work smooth with Docker
-ENVIRONMENT = os.getenv('ENVIRONMENT', 'PROD')
-POST_ERRORS = os.getenv('POST_ERRORS', True)
-POST_WARNINGS = os.getenv('POST_WARNINGS', True)
+ENVIRONMENT        = os.getenv('ENVIRONMENT', 'PROD')
+POST_ERRORS        = os.getenv('POST_ERRORS', True)
+POST_WARNINGS      = os.getenv('POST_WARNINGS', True)
 
-HIPCHAT_SERVER  = os.getenv('HIPCHAT_SERVER', 'api.hipchat.com')
-HIPCHAT_TOKEN   = os.getenv('HIPCHAT_TOKEN', '')
-HIPCHAT_ROOM_ID = os.getenv('HIPCHAT_ROOM_ID', '')
+HIPCHAT_SERVER     = os.getenv('HIPCHAT_SERVER', 'api.hipchat.com')
+HIPCHAT_TOKEN      = os.getenv('HIPCHAT_TOKEN', '')
+HIPCHAT_ROOM_ID    = os.getenv('HIPCHAT_ROOM_ID', '')
 
-TEAMS_WEBHOOK_URL = os.getenv('TEAMS_WEBHOOK_URL', '')
+TEAMS_WEBHOOK_URL  = os.getenv('TEAMS_WEBHOOK_URL', '')
 
 SLACK_WEBHOOK_URL  = os.getenv('SLACK_WEBHOOK_URL', '')
 SLACK_CHANNEL_NAME = os.getenv('SLACK_CHANNEL_NAME', '')
