@@ -23,7 +23,7 @@ def flush_slack_queue(webhook_url, channel, environment='unknown'):
   payload = {
       'channel': channel,
       'username': 'Nginx Upstream Monitor',
-      'text': "Nginx Upstream Monitor has found {0} problems on the *{1}* environment".format(count, environment),
+      'text': "We found {0} {2} on the *{1}* environment:".format(count, environment, "problem" if count < 2 else "problems"),
       "attachments": slack_attachments
   }
 
