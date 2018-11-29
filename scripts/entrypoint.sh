@@ -5,18 +5,12 @@
 #  - does sanity checks
 #  - launches the python script
 
-# Defaults
-POST_WARNINGS=${POST_WARNINGS:-true}
-POST_ERRORS=${POST_ERRORS:-true}
-
 # Configuration parameters for the nginx endpoint
 NGINX_SERVER_URL=${NGINX_SERVER_URL:-"https://demo.nginx.com"}
 
 # Some debug info
 echo "DEBUG variables:"
-echo "- POST_WARNINGS:      $POST_WARNINGS"
-echo "- POST_ERRORS:        $POST_ERRORS"
-echo ""
 echo "- NGINX_SERVER_URL:   $NGINX_SERVER_URL"
+echo ""
 
 ./upstreams.py $NGINX_SERVER_URL

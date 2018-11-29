@@ -7,6 +7,7 @@ import os
 import json
 import urllib.request
 import urllib.parse
+from distutils.util import strtobool
 
 from integrations.hipchat import *
 from integrations.teams import *
@@ -21,8 +22,8 @@ use_digest         = os.getenv('USE_DIGEST_NOTIFICATIONS', 0)
 
 # We read configuration as environment variables to make it work smooth with Docker
 ENVIRONMENT        = os.getenv('ENVIRONMENT', 'PROD')
-POST_ERRORS        = os.getenv('POST_ERRORS', True)
-POST_WARNINGS      = os.getenv('POST_WARNINGS', True)
+POST_ERRORS        = strtobool(os.getenv('POST_ERRORS', True))
+POST_WARNINGS      = strtobool(os.getenv('POST_WARNINGS', True))
 
 HIPCHAT_SERVER     = os.getenv('HIPCHAT_SERVER', 'api.hipchat.com')
 HIPCHAT_TOKEN      = os.getenv('HIPCHAT_TOKEN', '')
@@ -32,7 +33,6 @@ TEAMS_WEBHOOK_URL  = os.getenv('TEAMS_WEBHOOK_URL', '')
 
 SLACK_WEBHOOK_URL  = os.getenv('SLACK_WEBHOOK_URL', '')
 SLACK_CHANNEL_NAME = os.getenv('SLACK_CHANNEL_NAME', '')
-
 
 def flush_notification_queue(base_url):
 
@@ -233,6 +233,11 @@ if __name__ == "__main__":
   import sys
 
   base_url = sys.argv[1]
+
+  print ("DEBUG INFO:")
+  print (" - POST_ERRORS:   %s" % POST_ERRORS)
+  print (" - POST_WARNINGS: %s" % POST_WARNINGS)
+  print ("")
 
   check_upstreams(base_url)
 
