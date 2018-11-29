@@ -12,7 +12,7 @@ from integrations.hipchat import *
 from integrations.teams import *
 from integrations.slack import *
 
-ignore_backup_members = False
+ignore_backup_members = True
 
 send_hipchat = os.getenv('HIPCHAT_ENABLED', 0)
 send_teams   = os.getenv('TEAMS_ENABLED', 0)
