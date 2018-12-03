@@ -7,7 +7,6 @@ import os
 import json
 import urllib.request
 import urllib.parse
-from distutils.util import strtobool
 
 from integrations.hipchat import *
 from integrations.teams import *
@@ -22,8 +21,8 @@ use_digest         = os.getenv('USE_DIGEST_NOTIFICATIONS', 0)
 
 # We read configuration as environment variables to make it work smooth with Docker
 ENVIRONMENT        = os.getenv('ENVIRONMENT', 'PROD')
-POST_ERRORS        = strtobool(os.getenv('POST_ERRORS', True))
-POST_WARNINGS      = strtobool(os.getenv('POST_WARNINGS', True))
+POST_ERRORS        = os.getenv('POST_ERRORS', 'True')
+POST_WARNINGS      = os.getenv('POST_WARNINGS', 'True')
 
 HIPCHAT_SERVER     = os.getenv('HIPCHAT_SERVER', 'api.hipchat.com')
 HIPCHAT_TOKEN      = os.getenv('HIPCHAT_TOKEN', '')
@@ -220,7 +219,7 @@ def check_upstreams(base_url):
               message = "All servers look good, not sending a message"
 
           # We are done with processing, show a result and send it to the integrations
-          if (status == 'ERROR' and POST_ERRORS) or (status == 'WARNING' and POST_WARNINGS):
+          if (status == 'ERROR' and POST_ERRORS == 'True') or (status == 'WARNING' and POST_WARNINGS == 'True'):
             if use_digest:
               queue_notification(component=upstream, message=message, status=status, total_upstreams=total, healthy_upstreams=up)
             else:
