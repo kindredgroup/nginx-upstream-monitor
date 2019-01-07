@@ -15,7 +15,7 @@ def hipchat_notify(token, room, message, link_url='http://www.example.com',
                    total_upstreams=0, healthy_upstreams=0, environment='PROD'):
 
     color = 'yellow'
-    if status == 'error':
+    if status == 'ERROR':
       color = 'red'
 
     if len(message) > 10000:

@@ -38,7 +38,7 @@ def flush_slack_queue(webhook_url, channel, environment='unknown'):
 def slack_queue(component, message, status, total_upstreams, healthy_upstreams, link_url=''):
 
   color = 'warning'
-  if status == 'error':
+  if status == 'ERROR':
     color = 'danger'
 
   attachment = {

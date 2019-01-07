@@ -38,13 +38,13 @@ def teams_queue(component, message, status, total_upstreams, healthy_upstreams):
 
   # TODO: Don't hotlink to someone else's image, host our own somewhere static
   status_image = "http://www.keysigns.co.uk/images/hazard-warning-safety-signs-p1254-38488_zoom.jpg"
-  if status == 'error':
+  if status == 'ERROR':
     status_image = "https://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg"
 
   section = {
     "startGroup": "true",
     "activityImage": status_image,
-    "activityTitle": "{} - {}".format(component, message),
+    "activityTitle": "{}: {} - {}".format(status, component, message),
     "activitySubTitle": "Total upstreams: {0} - Healthy upstream: {1}".format(total_upstreams, healthy_upstreams)
   }
 
@@ -55,7 +55,7 @@ def teams_notify(webhook, message, link_url='http://www.example.com', component=
 
   # TODO: Don't hotlink to someone else's image, host our own somewhere static
   status_image = "http://www.keysigns.co.uk/images/hazard-warning-safety-signs-p1254-38488_zoom.jpg"
-  if status == 'error':
+  if status == 'ERROR':
     status_image = "https://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg"
 
   section = {
