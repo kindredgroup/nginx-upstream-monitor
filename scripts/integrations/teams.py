@@ -36,10 +36,9 @@ def flush_teams_queue(webhook_url, environment='unknown', link_url=''):
 # Add a notification to the queue
 def teams_queue(component, message, status, total_upstreams, healthy_upstreams):
 
-  # TODO: Don't hotlink to someone else's image, host our own somewhere static
-  status_image = "http://www.keysigns.co.uk/images/hazard-warning-safety-signs-p1254-38488_zoom.jpg"
+  status_image = "https://www.karelbemelmans.com/images/teams-status-images/warning.jpg"
   if status == 'ERROR':
-    status_image = "https://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg"
+    status_image = "https://www.karelbemelmans.com/images/teams-status-images/error.jpg"
 
   section = {
     "startGroup": "true",
@@ -53,10 +52,9 @@ def teams_queue(component, message, status, total_upstreams, healthy_upstreams):
 
 def teams_notify(webhook, message, link_url='http://www.example.com', component='unknown', status='unknown', total_upstreams=0, healthy_upstreams=0, environment='PROD'):
 
-  # TODO: Don't hotlink to someone else's image, host our own somewhere static
-  status_image = "http://www.keysigns.co.uk/images/hazard-warning-safety-signs-p1254-38488_zoom.jpg"
+  status_image = "https://www.karelbemelmans.com/images/teams-status-images/warning.jpg"
   if status == 'ERROR':
-    status_image = "https://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg"
+    status_image = "https://www.karelbemelmans.com/images/teams-status-images/error.jpg"
 
   section = {
     "startGroup": "true",
