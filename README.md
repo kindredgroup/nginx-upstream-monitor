@@ -46,6 +46,14 @@ and then run it like:
 docker run --env-file=docker.env --rm -t kindredgroup/nginx-upstream-monitor
 ```
 
+## Digst notifications
+
+Instead of getting 1 line per notification you can also get a digest message that combines all the warnings and errors that were found in the current run. To use digest notifications add this variable to your config file:
+
+```
+USE_DIGEST_NOTIFICATIONS=1
+```
+
 ## Supported integrations
 
 You can use multiple integrations at the same time, but be aware that that will make your notifications run a bit slower.
@@ -86,6 +94,10 @@ Required environment variables are:
   - SLACK_ENABLED=1
   - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxx/yyy
   - SLACK_CHANNEL_NAME=#channel
+
+Single notification:
+
+The Slack integration has not single notification support.
 
 Digest notification:
 
